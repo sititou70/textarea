@@ -39,6 +39,9 @@
     }
 
     #statusbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       padding: 4px 16px;
       font-size: 12px;
       color: #666;
@@ -46,16 +49,38 @@
       user-select: none;
       flex-shrink: 0;
     }
+
+    #wrap-toggle {
+      background: none;
+      border: 1px solid #444;
+      border-radius: 3px;
+      color: #666;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 1px 6px;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    #wrap-toggle:hover {
+      color: #d4d4d4;
+      border-color: #666;
+    }
   </style>
 </head>
 <body>
   <textarea id="editor" autofocus spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
-  <div id="statusbar">0 文字</div>
+  <div id="statusbar">
+    <span id="char-count">0 文字</span>
+    <button id="wrap-toggle" type="button"></button>
+  </div>
 
   <script>
     const editor = document.getElementById('editor');
-    const statusbar = document.getElementById('statusbar');
+    const charCount = document.getElementById('char-count');
+    const wrapToggle = document.getElementById('wrap-toggle');
     const STORAGE_KEY = 'textarea-text';
+    const WRAP_KEY = 'textarea-wrap';
 
     editor.value = localStorage.getItem(STORAGE_KEY) ?? '';
     updateStatus();
@@ -67,7 +92,28 @@
 
     function updateStatus() {
       const count = [...editor.value].length;
-      statusbar.textContent = `${count.toLocaleString("ja-JP")} 文字`;
+      charCount.textContent = `${count.toLocaleString("ja-JP")} 文字`;
+    }
+
+    let wrap = localStorage.getItem(WRAP_KEY) === 'on';
+    applyWrap();
+
+    wrapToggle.addEventListener('click', () => {
+      wrap = !wrap;
+      localStorage.setItem(WRAP_KEY, wrap ? 'on' : 'off');
+      applyWrap();
+    });
+
+    function applyWrap() {
+      if (wrap) {
+        editor.style.whiteSpace = '';
+        editor.style.overflowX = '';
+        wrapToggle.textContent = 'wrap: on';
+      } else {
+        editor.style.whiteSpace = 'pre';
+        editor.style.overflowX = 'auto';
+        wrapToggle.textContent = 'wrap: off';
+      }
     }
   </script>
 </body>
