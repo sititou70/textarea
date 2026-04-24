@@ -1,0 +1,17 @@
+{
+	"name": "textarea",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "http-server -o"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.13",
+		"http-server": "^14.1.1"
+	}
+}

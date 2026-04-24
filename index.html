@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>textarea</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      background: #1a1a1a;
+      color: #d4d4d4;
+      font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+    }
+
+    #editor {
+      flex: 1;
+      width: 100%;
+      padding: 16px;
+      background: transparent;
+      color: inherit;
+      font-family: inherit;
+      font-size: 17px;
+      line-height: 1.6;
+      border: none;
+      outline: none;
+      resize: none;
+      caret-color: #d4d4d4;
+    }
+
+    #statusbar {
+      padding: 4px 16px;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #2a2a2a;
+      user-select: none;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="editor" autofocus spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
+  <div id="statusbar">0 文字</div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const statusbar = document.getElementById('statusbar');
+    const STORAGE_KEY = 'textarea-text';
+
+    editor.value = localStorage.getItem(STORAGE_KEY) ?? '';
+    updateStatus();
+
+    editor.addEventListener('input', () => {
+      localStorage.setItem(STORAGE_KEY, editor.value);
+      updateStatus();
+    });
+
+    function updateStatus() {
+      const count = [...editor.value].length;
+      statusbar.textContent = `${count.toLocaleString("ja-JP")} 文字`;
+    }
+  </script>
+</body>
+</html>
