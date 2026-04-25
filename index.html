@@ -20,7 +20,7 @@
       flex-direction: column;
       background: #1a1a1a;
       color: #d4d4d4;
-      font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+      font-family: 'HackGen Console NF', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
     }
 
     #editor {
@@ -38,7 +38,7 @@
       caret-color: #d4d4d4;
     }
 
-    #statusbar {
+    #statusBar {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -50,7 +50,7 @@
       flex-shrink: 0;
     }
 
-    #wrap-toggle {
+    #wrapToggle {
       background: none;
       border: 1px solid #444;
       border-radius: 3px;
@@ -62,7 +62,7 @@
       line-height: 1.4;
     }
 
-    #wrap-toggle:hover {
+    #wrapToggle:hover {
       color: #d4d4d4;
       border-color: #666;
     }
@@ -70,15 +70,12 @@
 </head>
 <body>
   <textarea id="editor" autofocus spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
-  <div id="statusbar">
-    <span id="char-count">0 文字</span>
-    <button id="wrap-toggle" type="button"></button>
+  <div id="statusBar">
+    <span id="charCount">0 文字</span>
+    <button id="wrapToggle" type="button"></button>
   </div>
 
   <script>
-    const editor = document.getElementById('editor');
-    const charCount = document.getElementById('char-count');
-    const wrapToggle = document.getElementById('wrap-toggle');
     const STORAGE_KEY = 'textarea-text';
     const WRAP_KEY = 'textarea-wrap';
 
