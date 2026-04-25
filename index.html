@@ -1,118 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>textarea</title>
-  <link rel="icon" href="data:,">
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      background: #1a1a1a;
-      color: #d4d4d4;
-      font-family: 'HackGen Console NF', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-    }
-
-    #editor {
-      flex: 1;
-      width: 100%;
-      padding: 16px;
-      background: transparent;
-      color: inherit;
-      font-family: inherit;
-      font-size: 17px;
-      line-height: 1.6;
-      border: none;
-      outline: none;
-      resize: none;
-      caret-color: #d4d4d4;
-    }
-
-    #statusBar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 4px 16px;
-      font-size: 12px;
-      color: #666;
-      border-top: 1px solid #2a2a2a;
-      user-select: none;
-      flex-shrink: 0;
-    }
-
-    #wrapToggle {
-      background: none;
-      border: 1px solid #444;
-      border-radius: 3px;
-      color: #666;
-      font-family: inherit;
-      font-size: 12px;
-      padding: 1px 6px;
-      cursor: pointer;
-      line-height: 1.4;
-    }
-
-    #wrapToggle:hover {
-      color: #d4d4d4;
-      border-color: #666;
-    }
-  </style>
-</head>
-<body>
-  <textarea id="editor" autofocus spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
-  <div id="statusBar">
-    <span id="charCount">0 文字</span>
-    <button id="wrapToggle" type="button"></button>
-  </div>
-
-  <script>
-    const STORAGE_KEY = 'textarea-text';
-    const WRAP_KEY = 'textarea-wrap';
-
-    editor.value = localStorage.getItem(STORAGE_KEY) ?? '';
-    updateStatus();
-
-    editor.addEventListener('input', () => {
-      localStorage.setItem(STORAGE_KEY, editor.value);
-      updateStatus();
-    });
-
-    function updateStatus() {
-      const count = [...editor.value].length;
-      charCount.textContent = `${count.toLocaleString("ja-JP")} 文字`;
-    }
-
-    let wrap = localStorage.getItem(WRAP_KEY) === 'on';
-    applyWrap();
-
-    wrapToggle.addEventListener('click', () => {
-      wrap = !wrap;
-      localStorage.setItem(WRAP_KEY, wrap ? 'on' : 'off');
-      applyWrap();
-    });
-
-    function applyWrap() {
-      if (wrap) {
-        editor.style.whiteSpace = '';
-        editor.style.overflowX = '';
-        wrapToggle.textContent = 'wrap: on';
-      } else {
-        editor.style.whiteSpace = 'pre';
-        editor.style.overflowX = 'auto';
-        wrapToggle.textContent = 'wrap: off';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>textarea</title>
+    <link rel="icon" href="data:," />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-    }
-  </script>
-</body>
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        background: #1a1a1a;
+        color: #d4d4d4;
+        font-family:
+          "HackGen Console NF", ui-monospace, "Cascadia Code",
+          "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+      }
+
+      #editor {
+        flex: 1;
+        width: 100%;
+        padding: 16px;
+        background: transparent;
+        color: inherit;
+        font-family: inherit;
+        font-size: 17px;
+        line-height: 1.6;
+        border: none;
+        outline: none;
+        resize: none;
+        caret-color: #d4d4d4;
+      }
+
+      #statusBar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 4px 16px;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #2a2a2a;
+        user-select: none;
+        flex-shrink: 0;
+      }
+
+      #wrapToggle {
+        background: none;
+        border: 1px solid #444;
+        border-radius: 3px;
+        color: #666;
+        font-family: inherit;
+        font-size: 12px;
+        padding: 1px 6px;
+        cursor: pointer;
+        line-height: 1.4;
+      }
+
+      #wrapToggle:hover {
+        color: #d4d4d4;
+        border-color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea
+      id="editor"
+      autofocus
+      spellcheck="false"
+      autocorrect="off"
+      autocapitalize="off"
+    >
+    </textarea>
+    <div id="statusBar">
+      <span id="charCount">0 文字</span>
+      <button id="wrapToggle" type="button"></button>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "textarea-text";
+      const WRAP_KEY = "textarea-wrap";
+
+      editor.value = localStorage.getItem(STORAGE_KEY) ?? "";
+      updateStatus();
+
+      editor.addEventListener("input", () => {
+        localStorage.setItem(STORAGE_KEY, editor.value);
+        updateStatus();
+      });
+
+      function updateStatus() {
+        const count = [...editor.value].length;
+        charCount.textContent = `${count.toLocaleString("ja-JP")} 文字`;
+      }
+
+      let wrap = localStorage.getItem(WRAP_KEY) === "on";
+      applyWrap();
+
+      wrapToggle.addEventListener("click", () => {
+        wrap = !wrap;
+        localStorage.setItem(WRAP_KEY, wrap ? "on" : "off");
+        applyWrap();
+      });
+
+      function applyWrap() {
+        if (wrap) {
+          editor.style.whiteSpace = "";
+          editor.style.overflowX = "";
+          wrapToggle.textContent = "wrap: on";
+        } else {
+          editor.style.whiteSpace = "pre";
+          editor.style.overflowX = "auto";
+          wrapToggle.textContent = "wrap: off";
+        }
+      }
+    </script>
+  </body>
 </html>
