@@ -22,7 +22,7 @@
       body {
         display: flex;
         flex-direction: column;
-        background: #1a1a1a;
+        background: #0d1117;
         color: #d4d4d4;
         font-family:
           "HackGen Console NF", ui-monospace, "Cascadia Code",
@@ -36,7 +36,7 @@
         background: transparent;
         color: inherit;
         font-family: inherit;
-        font-size: 17px;
+        font-size: 24px;
         line-height: 1.6;
         border: none;
         outline: none;
@@ -47,22 +47,22 @@
       #statusBar {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 32px;
         padding: 4px 16px;
-        font-size: 12px;
+        font-size: 18px;
         color: #666;
-        border-top: 1px solid #2a2a2a;
+        border-top: 1px solid #555;
         user-select: none;
         flex-shrink: 0;
       }
 
       #wrapToggle {
         background: none;
-        border: 1px solid #444;
+        border: 1px solid #555;
         border-radius: 3px;
         color: #666;
         font-family: inherit;
-        font-size: 12px;
+        font-size: 18px;
         padding: 1px 6px;
         cursor: pointer;
         line-height: 1.4;
@@ -102,7 +102,7 @@
 
       function updateStatus() {
         const count = [...editor.value].length;
-        charCount.textContent = `${count.toLocaleString("ja-JP")} 文字`;
+        charCount.textContent = `${count.toLocaleString("ja-JP")} code points`;
       }
 
       let wrap = localStorage.getItem(WRAP_KEY) === "on";
